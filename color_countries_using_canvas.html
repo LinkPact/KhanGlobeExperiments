@@ -38,13 +38,35 @@
     context.stroke();
 
 
+    country_val_map = {};
+    d3.tsv("data/countries_with_vals.tsv", function(error, country_val) {
+
+        country_val.forEach(function (country) {
+            var name = country["Country"];
+            country_val_map[name] = country["Value"];
+        });
+    });
+
+
     d3.json("data/world-50m.json", function(error, world) {
         d3.csv("data/iso_3166.csv", function(error, iso_data) {
 
+//            console.log(country_val);
+
+//            country_val_map = {};
+//            country_val.forEach(function(country) {
+//                var name = country["Country"];
+//                country_val_map[name] = country["Value"];
+//            });
+
             iso_data.forEach(function(country) {
                 if (country.name == "Sweden") {
+                    var name = country.name;
+
                     console.log(country);
                     console.log(country['country-code']);
+
+                    console.log("Value", country_val_map[name]);
                 }
             });
 //            console.log(iso_data[0]);
