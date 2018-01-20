@@ -16,9 +16,13 @@
 
     var context = canvas.node().getContext("2d");
 
-    var projection = d3.geo.kavrayskiy7(),
-        color = d3.scale.category20(),
-        graticule = d3.geo.graticule();
+    var projection = d3.geo.kavrayskiy7();
+    var color = d3.scale.linear()
+        .domain([0, 100])
+        .interpolate(d3.interpolateHcl)
+        .range([d3.rgb("#ffffff"), d3.rgb("#00ff00")]);
+//    var color = d3.scale.category20();
+    var graticule = d3.geo.graticule();
 
     var path = d3.geo.path()
         .projection(projection)
@@ -51,14 +55,6 @@
     d3.json("data/world-50m.json", function(error, world) {
         d3.csv("data/iso_3166.csv", function(error, iso_data) {
 
-//            console.log(country_val);
-
-//            country_val_map = {};
-//            country_val.forEach(function(country) {
-//                var name = country["Country"];
-//                country_val_map[name] = country["Value"];
-//            });
-
             iso_data.forEach(function(country) {
                 if (country.name == "Sweden") {
                     var name = country.name;
@@ -66,11 +62,9 @@
                     console.log(country);
                     console.log(country['country-code']);
 
-                    console.log("Value", country_val_map[name]);
+                    console.log("Value:", country_val_map[name]);
                 }
             });
-//            console.log(iso_data[0]);
-
 
             var countries = topojson.feature(world, world.objects.countries).features,
                 neighbors = topojson.neighbors(world.objects.countries.geometries);
@@ -83,12 +77,14 @@
                     console.log(d);
 //                var test_color = color(d.color = d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0);
 //                console.log(test_color);
-                    my_color = color(10);
+                    my_color = color(100);
                 }
                 else {
-                    my_color = color(d.color = d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0);
+                    my_color = color(10);
+//                    my_color = color(d.color = d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0);
+                    console.log(my_color);
                 }
-                context.fillStyle = color(my_color);
+                context.fillStyle = my_color;
 //            context.fillStyle = color(d.color = d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0);
 
                 context.beginPath();
