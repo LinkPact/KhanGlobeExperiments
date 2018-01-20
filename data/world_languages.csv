@@ -1,0 +1,81 @@
+﻿OBJECTID,SOVEREIGNT,TYPE_,COUNTRY,FIRST_OFFICIAL,SECOND_OFFICIAL,THIRD_OFFICIAL,ENGLISH_FIRST,FRENCH_FIRST,ARABIC_FIRST,SPANISH_FIRST,PORTUGUESE_FIRST,CHINESE_FIRST,RUSSIAN_FIRST,WORLD_LANGUAGES_FIRST
+21,Central African Republic,Sovereign country,Central African Republic,French,Sangho, ,0,1,0,0,0,0,0,French
+23,Switzerland,Sovereign country,Switzerland,German,French,Italian,0,1,0,0,0,0,0,French
+26,Ivory Coast,Sovereign country,Ivory Coast,French, , ,0,1,0,0,0,0,0,French
+28,Cameroon,Sovereign country,Cameroon,English,French, ,1,1,0,0,0,0,0,English_French
+33,Albania,Sovereign country,Albania,Albanian, , ,0,0,0,0,0,0,0,Other
+34,Finland,Country,Aland,Finnish,Swedish, ,0,0,0,0,0,0,0,Other
+35,Andorra,Sovereign country,Andorra,Catalan, , ,0,0,0,0,0,0,0,Other
+42,Austria,Sovereign country,Austria,German, , ,0,0,0,0,0,0,0,Other
+45,Belgium,Sovereign country,Belgium,Dutch,French,German,0,1,0,0,0,0,0,French
+46,Benin,Sovereign country,Benin,French, , ,0,1,0,0,0,0,0,French
+47,Burkina Faso,Sovereign country,Burkina Faso,French, , ,0,1,0,0,0,0,0,French
+50,United Kingdom,Country,Jersey,English, , ,1,0,0,0,0,0,0,English
+1,Bulgaria,Sovereign country,Bulgaria,Bulgarian, , ,0,0,0,0,0,0,0,Other
+3,Bosnia and Herzegovina,Sovereign country,Bosnia and Herzegovina,Bosnian,Croatian,Serbian,0,0,0,0,0,0,0,Other
+5,Belarus,Sovereign country,Belarus,Russian,Belarusian, ,0,0,0,0,0,0,1,Russian
+12,Democratic Republic of the Congo,Sovereign country,Democratic Republic of the Congo,French,Lingala, ,0,1,0,0,0,0,0,French
+13,Republic of Congo,Sovereign country,Republic of Congo,French,Lingala, ,0,1,0,0,0,0,0,French
+17,Cape Verde,Sovereign country,Cape Verde,Portuguese, , ,0,0,0,0,1,0,0,Portuguese
+61,Czech Republic,Sovereign country,Czech Republic,Czech, , ,0,0,0,0,0,0,0,Other
+62,Germany,Sovereign country,Germany,German, , ,0,0,0,0,0,0,0,Other
+65,Denmark,Country,Denmark,Danish,English, ,1,0,0,0,0,0,0,English
+67,Algeria,Sovereign country,Algeria,Arabic,French, ,0,1,1,0,0,0,0,French_Arabic
+69,Egypt,Sovereign country,Egypt,Arabic, , ,0,0,1,0,0,0,0,Arabic
+71,Spain,Sovereign country,Spain,Spanish, , ,0,0,0,1,0,0,0,Spanish
+72,Estonia,Sovereign country,Estonia,Estonian, , ,0,0,0,0,0,0,0,Other
+74,Finland,Country,Finland,Finnish,Swedish, ,0,0,0,0,0,0,0,Other
+78,Denmark,Dependency,Faroe Islands,Faroese,Danish, ,0,0,0,0,0,0,0,Other
+80,Gabon,Sovereign country,Gabon,French, , ,0,1,0,0,0,0,0,French
+81,United Kingdom,Country,United Kingdom,English, , ,1,0,0,0,0,0,0,English
+83,United Kingdom,Country,Guernsey,English,French, ,1,1,0,0,0,0,0,English_French
+84,Ghana,Sovereign country,Ghana,English, , ,1,0,0,0,0,0,0,English
+85,United Kingdom,Dependency,Gibraltar,English, , ,1,0,0,0,0,0,0,English
+86,Guinea,Sovereign country,Guinea,French, , ,0,1,0,0,0,0,0,French
+87,Gambia,Sovereign country,Gambia,English, , ,1,0,0,0,0,0,0,English
+88,Guinea Bissau,Sovereign country,Guinea Bissau,Portuguese, , ,0,0,0,0,1,0,0,Portuguese
+89,Equatorial Guinea,Sovereign country,Equatorial Guinea,Spanish,French, ,0,1,0,1,0,0,0,French_Spanish
+90,Greece,Sovereign country,Greece,Greek, , ,0,0,0,0,0,0,0,Other
+92,Denmark,Country,Greenland,Greenlandic,Danish, ,0,0,0,0,0,0,0,Other
+98,Croatia,Sovereign country,Croatia,Croatian, , ,0,0,0,0,0,0,0,Other
+100,Hungary,Sovereign country,Hungary,Hungarian, , ,0,0,0,0,0,0,0,Other
+102,United Kingdom,Country,Isle of Man,English,Irish, ,1,0,0,0,0,0,0,English
+105,Ireland,Sovereign country,Ireland,English, , ,1,0,0,0,0,0,0,English
+108,Iceland,Sovereign country,Iceland,Icelandic, , ,0,0,0,0,0,0,0,Other
+110,Italy,Sovereign country,Italy,Italian, , ,0,0,0,0,0,0,0,Other
+112,Macedonia,Sovereign country,Macedonia,Macedonian,Albanian, ,0,0,0,0,0,0,0,Other
+113,Mali,Sovereign country,Mali,French, , ,0,1,0,0,0,0,0,French
+114,Malta,Sovereign country,Malta,Maltese,English, ,1,0,0,0,0,0,0,English
+116,Montenegro,Sovereign country,Montenegro,Montenegrin, , ,0,0,0,0,0,0,0,Other
+155,Kosovo,Sovereign country,Kosovo,Albanian,Serbian, ,0,0,0,0,0,0,0,Other
+158,Liberia,Sovereign country,Liberia,English, , ,1,0,0,0,0,0,0,English
+159,Libya,Sovereign country,Libya,Arabic, , ,0,0,1,0,0,0,0,French
+161,Liechtenstein,Sovereign country,Liechtenstein,German, , ,0,0,0,0,0,0,0,Other
+165,Lithuania,Sovereign country,Lithuania,Lithuanian, , ,0,0,0,0,0,0,0,Other
+166,Luxembourg,Sovereign country,Luxembourg,Luxembourgish,French,German,0,1,0,0,0,0,0,French
+167,Latvia,Sovereign country,Latvia,Latvian, , ,0,0,0,0,0,0,0,Other
+169,Morocco,Sovereign country,Morocco,Arabic, , ,0,0,1,0,0,0,0,Arabic
+170,Monaco,Sovereign country,Monaco,French, , ,0,1,0,0,0,0,0,French
+182,Romania,Sovereign country,Romania,Romanian, , ,0,0,0,0,0,0,0,Other
+185,Western Sahara,Indeterminate,Western Sahara,Arabic, , ,0,0,1,0,0,0,0,Arabic
+187,Sudan,Sovereign country,Sudan,Arabic,English, ,1,0,1,0,0,0,0,English_Arabic
+188,South Sudan,Sovereign country,South Sudan,English, , ,1,0,0,0,0,0,0,English
+189,Senegal,Sovereign country,Senegal,French, , ,0,1,0,0,0,0,0,French
+120,Mauritania,Sovereign country,Mauritania,Arabic, , ,0,0,1,0,0,0,0,Arabic
+122,Portugal,Sovereign country,Portugal,Portuguese,Mirandese, ,0,0,0,0,1,0,0,Portuguese
+133,Niger,Sovereign country,Niger,French, , ,0,1,0,0,0,0,0,French
+135,Nigeria,Sovereign country,Nigeria,English, , ,1,0,0,0,0,0,0,English
+139,Norway,Sovereign country,Norway,Norwegian, , ,0,0,0,0,0,0,0,Other
+151,Poland,Sovereign country,Poland,Polish, , ,0,0,0,0,0,0,0,Other
+193,Sierra Leone,Sovereign country,Sierra Leone,English, , ,1,0,0,0,0,0,0,English
+195,San Marino,Sovereign country,San Marino,Italian, , ,0,0,0,0,0,0,0,Other
+199,Republic of Serbia,Sovereign country,Republic of Serbia,Serbian, , ,0,0,0,0,0,0,0,Other
+229,Vatican,Sovereign country,Vatican,Italian,Latin,French,0,1,0,0,0,0,0,French
+200,Sao Tome and Principe,Sovereign country,Sao Tome and Principe,Portuguese, , ,0,0,0,0,1,0,0,Portuguese
+202,Slovakia,Sovereign country,Slovakia,Slovak, , ,0,0,0,0,0,0,0,Other
+203,Slovenia,Sovereign country,Slovenia,Slovenian, , ,0,0,0,0,0,0,0,Other
+204,Sweden,Sovereign country,Sweden,Swedish, , ,0,0,0,0,0,0,0,Other
+210,Chad,Sovereign country,Chad,French,Arabic,Sara,0,1,1,0,0,0,0,French_Arabic
+214,Togo,Sovereign country,Togo,French, , ,0,1,0,0,0,0,0,French
+218,Tunisia,Sovereign country,Tunisia,Arabic, , ,0,0,1,0,0,0,0,Arabic
+224,Ukraine,Sovereign country,Ukraine,Ukrainian, , ,0,0,0,0,0,0,0,Other

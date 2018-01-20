@@ -20,15 +20,6 @@
     var projection = d3.geo.equirectangular()
         .translate([512, 256]).scale(163);
 
-    country_name_val_map = {};
-    d3.tsv("data/countries_with_vals.tsv", function(error, country_val) {
-
-        country_val.forEach(function (country) {
-            var name = country["Country"];
-            country_name_val_map[name] = country["Value"];
-        });
-    });
-
     country_id_name_map = {};
     d3.csv("data/iso_3166.csv", function(error, iso_data) {
         iso_data.forEach(function(country) {
@@ -37,6 +28,46 @@
             country_id_name_map[country_id] = country_name;
         });
     });
+
+    language_countries_map = {};
+    d3.csv("data/world_languages_parsed.csv", function(error, language_data) {
+        language_data.forEach(function(country) {
+            var country_language = country["FIRST_OFFICIAL"];
+            var country_name = country["COUNTRY"];
+
+            if (language_countries_map[country_language] == undefined) {
+                language_countries_map[country_language] = [];
+            }
+            language_countries_map[country_language].push(country_name);
+        });
+    });
+
+    console.log("language_countries_map", language_countries_map);
+
+    country_name_val_map = {};
+    d3.tsv("data/khan_translation_information.csv", function(error, country_val) {
+
+        country_val.forEach(function (entry) {
+            var language = entry["language"];
+            var language_coverage = entry["translated"];
+
+            var language_countries = language_countries_map[language];
+
+            if (language_countries != undefined) {
+                for (var i = 0; i <= language_countries.length; i++) {
+                    var country = language_countries[i];
+
+                    country_name_val_map[country] = language_coverage;
+                }
+            }
+            else {
+                console.log(language, " not found!");
+            }
+        });
+    });
+
+
+    console.log("Country name-val map", country_name_val_map);
 
     d3.json("data/world-50m.json", function(error, world) {
 
@@ -52,7 +83,7 @@
         var color = d3.scale.linear()
             .domain([0, 100])
             .interpolate(d3.interpolateHcl)
-            .range([d3.rgb("#ffffff"), d3.rgb("#00ff00")]);
+            .range([d3.rgb("#99ff99"), d3.rgb("#00ff00")]);
         var graticule = d3.geo.graticule();
 
         var path = d3.geo.path()
