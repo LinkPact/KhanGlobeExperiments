@@ -16,9 +16,12 @@
 
 <script>
 
+    var width = 1024;
+    var height = 512;
+
 //    var projection = d3.geo.kavrayskiy7();
-    var projection = d3.geo.equirectangular()
-        .translate([512, 256]).scale(163);
+    var projection = d3.geoEquirectangular()
+        .translate([width/2, height/2]).scale(163);
 
     country_id_name_map = {};
     d3.csv("data/used/iso_3166.csv", function(error, iso_data) {
@@ -71,29 +74,36 @@
 
     d3.json("data/used/world-50m.json", function(error, world) {
 
-        var width = 1024;
-        var height = 512;
+        let url = new URL(window.location.href);
+        let searchParams = new URLSearchParams(url.search);
+        let debugParam = searchParams.get('debug');  
+
+        var styleAttribute = "display:none;"
+        if(debugParam === 'true'){
+            styleAttribute = "";
+        }
 
         var canvas = d3.select("body").append("canvas")
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height)
+            .attr("style", styleAttribute);
 
         var context = canvas.node().getContext("2d");
 
-        var color = d3.scale.linear()
+        var color = d3.scaleLinear()
             .domain([0, 100])
             .interpolate(d3.interpolateHcl)
             .range([d3.rgb("#99ff99"), d3.rgb("#00ff00")]);
-        var graticule = d3.geo.graticule();
+        var graticule = d3.geoGraticule();
 
-        var path = d3.geo.path()
+        var path = d3.geoPath()
             .projection(projection)
             .context(context);
 
         context.strokeStyle = '#000';
         context.beginPath();
         path(graticule());
-        context.lineWidth = .5;
+        context.lineWidth = 0.5;
         context.stroke();
 
         context.strokeStyle = '#333';
@@ -162,7 +172,7 @@
         scene.add(root);
 
         function render() {
-            root.rotation.y += 0.02;
+            root.rotation.y += 0.01;
             requestAnimationFrame(render);
             renderer.render(scene, camera);
         }

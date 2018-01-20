@@ -4,7 +4,7 @@
   "description": "Interactive WebGL globes using THREE.js and D3.js",
   "main": "index.js",
   "dependencies": {
-    "d3": "^3.5.5",
+    "d3": "^4.12.2",
     "three": "^0.71.0"
   },
   "devDependencies": {
