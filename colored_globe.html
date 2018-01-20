@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script>
+
+    var width = 960,
+        height = 500;
+
+    var canvas = d3.select("body").append("canvas")
+        .attr("width", width)
+        .attr("height", height);
+
+    var context = canvas.node().getContext("2d");
+
+    var projection = d3.geo.kavrayskiy7();
+    var color = d3.scale.linear()
+        .domain([0, 100])
+        .interpolate(d3.interpolateHcl)
+        .range([d3.rgb("#ffffff"), d3.rgb("#00ff00")]);
+//    var color = d3.scale.category20();
+    var graticule = d3.geo.graticule();
+
+    var path = d3.geo.path()
+        .projection(projection)
+        .context(context);
+
+
+    context.strokeStyle = '#000';
+    context.beginPath();
+    path(graticule());
+    context.lineWidth = .5;
+    context.stroke();
+
+    context.strokeStyle = '#333';
+    context.beginPath();
+    path(graticule.outline());
+    context.lineWidth = 1.5;
+    context.stroke();
+
+
+    country_name_val_map = {};
+    d3.tsv("data/countries_with_vals.tsv", function(error, country_val) {
+
+        country_val.forEach(function (country) {
+            var name = country["Country"];
+            country_name_val_map[name] = country["Value"];
+        });
+    });
+
+    country_id_name_map = {};
+    d3.csv("data/iso_3166.csv", function(error, iso_data) {
+        iso_data.forEach(function(country) {
+            var country_name = country["name"];
+            var country_id = country["country-code"];
+            country_id_name_map[country_id] = country_name;
+        });
+    });
+
+    d3.json("data/world-50m.json", function(error, world) {
+        var countries = topojson.feature(world, world.objects.countries).features;
+//        var neighbors = topojson.neighbors(world.objects.countries.geometries);
+
+        countries.forEach(function(d) {
+
+            var country_name = country_id_name_map[d.id];
+            var country_value = country_name_val_map[country_name];
+
+            var country_color = color(country_value);
+            context.fillStyle = country_color;
+
+            context.beginPath();
+            path(d);
+            context.fill();
+        });
+    });
+
+</script>
+
+</body>
