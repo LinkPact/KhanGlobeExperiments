@@ -7,6 +7,7 @@
 <script src="js/node_scripts/d3.geo.projection.min.js"></script>
 <script src="js/node_scripts/topojson.min.js"></script>
 <script src="js/node_scripts/three.min.js"></script>
+<script src="js/controls/OrbitControls.js"></script>
 
 <!--<script src="node_modules/d3/d3.js"></script>-->
 <!--<script src="node_modules/d3-geo-projection/d3.geo.projection.js"></script>-->
@@ -135,12 +136,19 @@
 
         // Setup camera
         var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 6000);
-        camera.position.z = 500;
+        camera.position.z = 400;
 
         // Setup THREE renderer
         var renderer = new THREE.WebGLRenderer({antialias: true});
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
+
+        var controls = new THREE.OrbitControls( camera, renderer.domElement );
+        //controls.addEventListener( 'change', render ); // remove when using animation loop
+        // enable animation loop when using damping or autorotation
+        //controls.enableDamping = true;
+        //controls.dampingFactor = 0.25;
+        controls.enableZoom = false;
 
         // Add light
         var light = new THREE.HemisphereLight('#fff', '#666', 1.5);
@@ -172,7 +180,7 @@
         scene.add(root);
 
         function render() {
-            root.rotation.y += 0.01;
+            //root.rotation.y += 0.01;
             requestAnimationFrame(render);
             renderer.render(scene, camera);
         }
