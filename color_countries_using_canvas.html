@@ -42,55 +42,39 @@
     context.stroke();
 
 
-    country_val_map = {};
+    country_name_val_map = {};
     d3.tsv("data/countries_with_vals.tsv", function(error, country_val) {
 
         country_val.forEach(function (country) {
             var name = country["Country"];
-            country_val_map[name] = country["Value"];
+            country_name_val_map[name] = country["Value"];
         });
     });
 
+    country_id_name_map = {};
+    d3.csv("data/iso_3166.csv", function(error, iso_data) {
+        iso_data.forEach(function(country) {
+            var country_name = country["name"];
+            var country_id = country["country-code"];
+            country_id_name_map[country_id] = country_name;
+        });
+    });
 
     d3.json("data/world-50m.json", function(error, world) {
-        d3.csv("data/iso_3166.csv", function(error, iso_data) {
+        var countries = topojson.feature(world, world.objects.countries).features;
+//        var neighbors = topojson.neighbors(world.objects.countries.geometries);
 
-            iso_data.forEach(function(country) {
-                if (country.name == "Sweden") {
-                    var name = country.name;
+        countries.forEach(function(d) {
 
-                    console.log(country);
-                    console.log(country['country-code']);
+            var country_name = country_id_name_map[d.id];
+            var country_value = country_name_val_map[country_name];
 
-                    console.log("Value:", country_val_map[name]);
-                }
-            });
+            var country_color = color(country_value);
+            context.fillStyle = country_color;
 
-            var countries = topojson.feature(world, world.objects.countries).features,
-                neighbors = topojson.neighbors(world.objects.countries.geometries);
-
-
-            countries.forEach(function(d, i) {
-
-                var my_color;
-                if (d.id == 752) {
-                    console.log(d);
-//                var test_color = color(d.color = d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0);
-//                console.log(test_color);
-                    my_color = color(100);
-                }
-                else {
-                    my_color = color(10);
-//                    my_color = color(d.color = d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0);
-                    console.log(my_color);
-                }
-                context.fillStyle = my_color;
-//            context.fillStyle = color(d.color = d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0);
-
-                context.beginPath();
-                path(d);
-                context.fill();
-            });
+            context.beginPath();
+            path(d);
+            context.fill();
         });
     });
 
