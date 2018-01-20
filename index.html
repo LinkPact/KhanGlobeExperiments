@@ -21,7 +21,7 @@
         .translate([512, 256]).scale(163);
 
     country_id_name_map = {};
-    d3.csv("data/iso_3166.csv", function(error, iso_data) {
+    d3.csv("data/used/iso_3166.csv", function(error, iso_data) {
         iso_data.forEach(function(country) {
             var country_name = country["name"];
             var country_id = country["country-code"];
@@ -30,7 +30,7 @@
     });
 
     language_countries_map = {};
-    d3.csv("data/world_languages_parsed.csv", function(error, language_data) {
+    d3.csv("data/used/world_languages_parsed.csv", function(error, language_data) {
         language_data.forEach(function(country) {
             var country_language = country["FIRST_OFFICIAL"];
             var country_name = country["COUNTRY"];
@@ -45,7 +45,7 @@
     console.log("language_countries_map", language_countries_map);
 
     country_name_val_map = {};
-    d3.tsv("data/khan_translation_information.csv", function(error, country_val) {
+    d3.tsv("data/used/khan_translation_information.csv", function(error, country_val) {
 
         country_val.forEach(function (entry) {
             var language = entry["language"];
@@ -69,7 +69,7 @@
 
     console.log("Country name-val map", country_name_val_map);
 
-    d3.json("data/world-50m.json", function(error, world) {
+    d3.json("data/used/world-50m.json", function(error, world) {
 
         var width = 1024;
         var height = 512;
