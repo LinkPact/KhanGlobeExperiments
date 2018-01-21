@@ -217,9 +217,14 @@
             countries.forEach(function(d) {
 
                 var country_name = country_id_name_map[d.id];
+
                 var country_value = country_name_val_map[country_name];
 
-                var country_color = color(country_value);
+                var country_color = "rgb(150,150,150)"; // Default country color
+                if(country_value !== undefined)
+                {
+                    country_color = color(country_value);
+                }
                 context.fillStyle = country_color;
 
                 context.beginPath();
