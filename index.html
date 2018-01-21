@@ -75,6 +75,8 @@
 <script src="js/controls/OrbitControls.js"></script>
 <script src="js/map_localization/geoHelpers.js"></script>
 <script src="js/map_localization/utils.js"></script>
+<script src="js/map_localization/setEvents.js"></script>
+
 
 <!--<script src="node_modules/d3/d3.js"></script>-->
 <!--<script src="node_modules/d3-geo-projection/d3.geo.projection.js"></script>-->
@@ -155,8 +157,7 @@
 
     d3.json("data/used/world-50m.json", function(error, world) {
 
-//        console.log(topojson.feature);
-
+        // Not used yet, for overlayering texture on map
         var countries = topojson.feature(world, world.objects.countries);
         var geo = geodecoder(countries.features);
         console.log(geo);
@@ -164,12 +165,6 @@
             var country = geo.find(cntryID);
             return mapTexture(country, color);
         });
-
-
-//        console.log(countries);
-//        var geo = geodecoder(c);
-
-
 
         // Retrieve debugging parameter from search bar
         var url = new URL(window.location.href);
@@ -198,11 +193,11 @@
             .projection(projection)
             .context(context);
 
-        context.strokeStyle = '#000';
-        context.beginPath();
-        path(graticule());
-        context.lineWidth = 0.5;
-        context.stroke();
+//        context.strokeStyle = '#000';
+//        context.beginPath();
+//        path(graticule());
+//        context.lineWidth = 0.5;
+//        context.stroke();
 
         context.strokeStyle = '#333';
         context.beginPath();
@@ -210,10 +205,7 @@
         context.lineWidth = 1.5;
         context.stroke();
 
-
             var countries = topojson.feature(world, world.objects.countries).features;
-    //        var neighbors = topojson.neighbors(world.objects.countries.geometries);
-
             countries.forEach(function(d) {
 
                 var country_name = country_id_name_map[d.id];
@@ -253,6 +245,8 @@
         //controls.dampingFactor = 0.25;
         controls.enableZoom = false;
 
+        var currentCountry;
+
         // Add light
         var light = new THREE.HemisphereLight('#fff', '#666', 1.5);
         light.position.set(0, 500, 0);
@@ -266,6 +260,7 @@
 
         // Generate a mesh layer based on materials and geometry
         var baseLayer = new THREE.Mesh(sphere, waterMaterial);
+        baseLayer.addEventListener('mousemove', onGlobeMousemove);
 
         // Generate a texture
         var mapTexture = new THREE.Texture(canvas.node());
@@ -281,6 +276,36 @@
         root.add(baseLayer);
         root.add(mapLayer);
         scene.add(root);
+
+
+        function onGlobeMousemove(event) {
+            var map;
+            var material;
+
+            var latlng = getEventCenter.call(this, event);
+
+            var country = geo.search(latlng[0], latlng[1]);
+//            console.log(country);
+
+            if (country !== null && country.code !== currentCountry) {
+                currentCountry = country.code;
+                console.log(currentCountry);
+//                d3.select("#msg").html(country.code);
+//
+//                map = textureCache(country.code, '#CDC290');
+//                material = new THREE.MeshPhongMaterial({map: map, transparent: true});
+//                if (!overlay) {
+//                    overlay = new THREE.Mesh(new THREE.SphereGeometry(201, 40, 40), material);
+//                    overlay.rotation.y = Math.PI;
+//                    root.add(overlay);
+//                }
+//                else {
+//                    overlay.material = material;
+//                }
+            }
+        }
+
+        setEvents(camera, [baseLayer], 'mousemove', 10);
 
         function render() {
             //root.rotation.y += 0.01;
