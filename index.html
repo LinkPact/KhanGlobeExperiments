@@ -61,7 +61,7 @@
             }
 
             a {
-                color: #ff1a1a;
+                color:rgb(157, 182, 59);
             }
         </style>
 </head>
@@ -82,12 +82,12 @@
 <!--<script src="node_modules/three/three.js"></script>-->
 
 <div class="project">
-    <div id="project-title">Bim</div>
+    <div id="project-title">English</div>
     <div id="project-info">
-        Morocco
+        100%
     </div>
     <div id="project-page">
-        <a href="http://bim.lbg.ac.at/en">Project Page</a>
+        <a href="https://www.khanacademy.org/">https://www.khanacademy.org/</a>
     </div>
 
 
@@ -230,6 +230,7 @@
 
         // Setup Three scene
         var scene = new THREE.Scene();
+        scene.background = new THREE.Color("rgb(96, 218, 235)");
 
         // Setup camera
         var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 6000);
@@ -253,7 +254,7 @@
         scene.add(light);
 
         // Generate material (and color) for base globe
-        var waterMaterial = new THREE.MeshBasicMaterial({color: '#003', transparent: true});
+        var waterMaterial = new THREE.MeshBasicMaterial({color: "rgb(27, 108, 225)", transparent: true});
 
         // Setup a geometry
         var sphere = new THREE.SphereGeometry(200, 100, 100);
