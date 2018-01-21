@@ -15,12 +15,12 @@ var load_name_value_map_csv = function(path, name_field, value_field) {
     return name_value_map;
 };
 
-var load_name_values_map_csv = function(path) {
+var load_name_values_map_csv = function(path, name_field, values_field) {
     var language_countries_map = {};
     d3.csv(path, function(error, language_data) {
         language_data.forEach(function(country) {
-            var country_language = country["FIRST_OFFICIAL"];
-            var country_name = country["COUNTRY"];
+            var country_language = country[name_field];
+            var country_name = country[values_field];
 
             if (language_countries_map[country_language] == undefined) {
                 language_countries_map[country_language] = [];
