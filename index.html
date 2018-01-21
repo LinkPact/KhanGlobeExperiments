@@ -1,5 +1,70 @@
 <!DOCTYPE html>
+<html>
+<head>
 <meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans" rel="stylesheet">
+        <style type="text/css">
+            html {
+                height: 100%;
+            }
+
+            body {
+                height: 100%;
+                margin: 0px;
+                overflow: hidden;
+
+                color: #bbb;
+                font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+                font-size: 1rem;
+            }
+
+            #title {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                font-family: 'Libre Baskerville', serif;
+                font-size: 30px;
+                line-height: 30px;
+                width: 400px;
+                padding: 40px;
+            }
+
+            #info {
+                position: absolute;
+                top: 30px;
+                left: 0px;
+                width: 300px;
+                padding: 40px;
+            }
+
+            .project {
+                position: absolute;
+                top: 90px;
+                right: 0px;
+                width: 300px;
+                padding: 40px;
+            }
+
+            #project-title {
+                font-family: 'Libre Baskerville', serif;
+                font-size: 30px;
+                line-height: 30px;
+            }
+
+            #project-info {
+                padding-top: 0.4rem;
+            }
+
+            #project-page {
+                padding-top: 0.4rem;
+                /*border-bottom: solid 1px grey;*/
+            }
+
+            a {
+                color:rgb(157, 182, 59);
+            }
+        </style>
+</head>
 
 <body>
 
@@ -18,6 +83,17 @@
 <!--<script src="node_modules/topojson/build/topojson.js"></script>-->
 <!--<script src="node_modules/three/three.js"></script>-->
 
+<div class="project">
+    <div id="project-title">English</div>
+    <div id="project-info">
+        100%
+    </div>
+    <div id="project-page">
+        <a href="https://www.khanacademy.org/">https://www.khanacademy.org/</a>
+    </div>
+
+
+</div>
 
 <script>
 
@@ -156,6 +232,7 @@
 
         // Setup Three scene
         var scene = new THREE.Scene();
+        scene.background = new THREE.Color("rgb(96, 218, 235)");
 
         // Setup camera
         var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 6000);
@@ -181,7 +258,7 @@
         scene.add(light);
 
         // Generate material (and color) for base globe
-        var waterMaterial = new THREE.MeshBasicMaterial({color: '#003', transparent: true});
+        var waterMaterial = new THREE.MeshBasicMaterial({color: "rgb(27, 108, 225)", transparent: true});
 
         // Setup a geometry
         var sphere = new THREE.SphereGeometry(200, 100, 100);
@@ -244,6 +321,24 @@
         render();
     });
 
+    function updateProjectInfo(locationEntry) {
+        var title = locationEntry["title"];
+        var info = locationEntry["info"];
+        var pageURL = locationEntry["url"];
+        // title, info, url
+
+        document.getElementById("project-title").textContent = title;
+        document.getElementById("project-info").textContent = info;
+        document.getElementById("project-page").innerHTML = "<a href=\"" + pageURL + "\">Language Page</a>";
+    }
+
+    function emptyProjectInfo() {
+        document.getElementById("project-title").textContent = "";
+        document.getElementById("project-info").textContent = "";
+        document.getElementById("project-page").textContent = "";
+    }
+
 </script>
 
 </body>
+</html>
