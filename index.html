@@ -159,11 +159,11 @@
 //        context.lineWidth = 0.5;
 //        context.stroke();
 
-        context.strokeStyle = '#333';
-        context.beginPath();
-        path(graticule.outline());
-        context.lineWidth = 1.5;
-        context.stroke();
+//        context.strokeStyle = '#333';
+//        context.beginPath();
+//        path(graticule.outline());
+//        context.lineWidth = 1.5;
+//        context.stroke();
 
         var countries = topojson.feature(world, world.objects.countries).features;
         countries.forEach(function(d) {
@@ -171,7 +171,11 @@
             var country_name = id_country_map[d.id];
             var country_value = country_name_val_map[country_name];
 
-            var country_color = color(country_value);
+            var country_color = "rgb(150,150,150)"; // Default country color
+            if(country_value !== undefined)
+            {
+                country_color = color(country_value);
+            }
             context.fillStyle = country_color;
 
             context.beginPath();
