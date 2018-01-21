@@ -94,8 +94,6 @@ var getPoint = function(event) {
 var getEventCenter = function(event, radius) {
     radius = radius || 200;
 
-    console.log("Calling getPoint");
-    console.log(this);
     var point = getPoint.call(this, event);
     var latRads = Math.acos(point.y / radius);
     var lngRads = Math.atan2(point.z, point.x);

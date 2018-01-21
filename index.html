@@ -173,6 +173,8 @@
         //controls.dampingFactor = 0.25;
         controls.enableZoom = false;
 
+        var currentCountry;
+
         // Add light
         var light = new THREE.HemisphereLight('#fff', '#666', 1.5);
         light.position.set(0, 500, 0);
@@ -186,7 +188,6 @@
 
         // Generate a mesh layer based on materials and geometry
         var baseLayer = new THREE.Mesh(sphere, waterMaterial);
-        console.log("baseLayer geometries: ", baseLayer.geometry);
         baseLayer.addEventListener('mousemove', onGlobeMousemove);
 
         // Generate a texture
@@ -212,21 +213,23 @@
             var latlng = getEventCenter.call(this, event);
 
             var country = geo.search(latlng[0], latlng[1]);
+//            console.log(country);
 
             if (country !== null && country.code !== currentCountry) {
                 currentCountry = country.code;
-                d3.select("#msg").html(country.code);
-
-                map = textureCache(country.code, '#CDC290');
-                material = new THREE.MeshPhongMaterial({map: map, transparent: true});
-                if (!overlay) {
-                    overlay = new THREE.Mesh(new THREE.SphereGeometry(201, 40, 40), material);
-                    overlay.rotation.y = Math.PI;
-                    root.add(overlay);
-                }
-                else {
-                    overlay.material = material;
-                }
+                console.log(currentCountry);
+//                d3.select("#msg").html(country.code);
+//
+//                map = textureCache(country.code, '#CDC290');
+//                material = new THREE.MeshPhongMaterial({map: map, transparent: true});
+//                if (!overlay) {
+//                    overlay = new THREE.Mesh(new THREE.SphereGeometry(201, 40, 40), material);
+//                    overlay.rotation.y = Math.PI;
+//                    root.add(overlay);
+//                }
+//                else {
+//                    overlay.material = material;
+//                }
             }
         }
 
