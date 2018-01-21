@@ -75,3 +75,33 @@ var geodecoder = function (features) {
         }
     }
 };
+
+var getPoint = function(event) {
+
+    var a = this.geometry.vertices[event.face.a];
+    var b = this.geometry.vertices[event.face.b];
+    var c = this.geometry.vertices[event.face.c];
+
+    var point = {
+        x: (a.x + b.x + c.x) / 3,
+        y: (a.y + b.y + c.y) / 3,
+        z: (a.z + b.z + c.z) / 3
+    };
+
+    return point;
+};
+
+var getEventCenter = function(event, radius) {
+    radius = radius || 200;
+
+    console.log("Calling getPoint");
+    console.log(this);
+    var point = getPoint.call(this, event);
+    var latRads = Math.acos(point.y / radius);
+    var lngRads = Math.atan2(point.z, point.x);
+    var lat = (Math.PI / 2 - latRads) * (180 / Math.PI);
+    var lng = (Math.PI - lngRads) * (180 / Math.PI);
+
+    return [lat, lng - 180];
+};
+
