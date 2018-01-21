@@ -51,12 +51,12 @@
         });
     });
 
-    country_id_name_map = {};
+    name_value_map = {};
     d3.csv("data/iso_3166.csv", function(error, iso_data) {
         iso_data.forEach(function(country) {
             var country_name = country["name"];
             var country_id = country["country-code"];
-            country_id_name_map[country_id] = country_name;
+            name_value_map[country_id] = country_name;
         });
     });
 
@@ -66,7 +66,7 @@
 
         countries.forEach(function(d) {
 
-            var country_name = country_id_name_map[d.id];
+            var country_name = name_value_map[d.id];
             var country_value = country_name_val_map[country_name];
 
             var country_color = color(country_value);

@@ -76,6 +76,7 @@
 <script src="js/map_localization/geoHelpers.js"></script>
 <script src="js/map_localization/utils.js"></script>
 <script src="js/map_localization/setEvents.js"></script>
+<script src="js/parsers.js"></script>
 
 
 <!--<script src="node_modules/d3/d3.js"></script>-->
@@ -97,6 +98,7 @@
 
 <script>
 
+
 //    import { feature as topojsonFeature } from 'topojson';
 
     var width = 1024;
@@ -106,54 +108,12 @@
     var projection = d3.geoEquirectangular()
         .translate([width/2, height/2]).scale(163);
 
-    country_id_name_map = {};
-    d3.csv("data/used/iso_3166.csv", function(error, iso_data) {
-        iso_data.forEach(function(country) {
-            var country_name = country["name"];
-            var country_id = country["country-code"];
-            country_id_name_map[country_id] = country_name;
-        });
-    });
+    var id_country_map = load_name_value_map_csv("data/used/iso_3166.csv", "country-code", "name");
+    var language_countries_map = load_name_values_map_csv("data/used/world_languages_parsed.csv", "FIRST_OFFICIAL", "COUNTRY");
+    var country_name_val_map = load_country_coverage_map_csv("data/used/khan_translation_information.csv", "language", "translated", language_countries_map);
+    var country_language_map = load_name_value_map_csv("data/used/world_languages_parsed.csv", "COUNTRY", "FIRST_OFFICIAL");
 
-    language_countries_map = {};
-    d3.csv("data/used/world_languages_parsed.csv", function(error, language_data) {
-        language_data.forEach(function(country) {
-            var country_language = country["FIRST_OFFICIAL"];
-            var country_name = country["COUNTRY"];
-
-            if (language_countries_map[country_language] == undefined) {
-                language_countries_map[country_language] = [];
-            }
-            language_countries_map[country_language].push(country_name);
-        });
-    });
-
-    console.log("language_countries_map", language_countries_map);
-
-    country_name_val_map = {};
-    d3.tsv("data/used/khan_translation_information.csv", function(error, country_val) {
-
-        country_val.forEach(function (entry) {
-            var language = entry["language"];
-            var language_coverage = entry["translated"];
-
-            var language_countries = language_countries_map[language];
-
-            if (language_countries != undefined) {
-                for (var i = 0; i <= language_countries.length; i++) {
-                    var country = language_countries[i];
-
-                    country_name_val_map[country] = language_coverage;
-                }
-            }
-            else {
-                console.log(language, " not found!");
-            }
-        });
-    });
-
-
-    console.log("Country name-val map", country_name_val_map);
+    console.log("ID countries map, ", id_country_map);
 
     d3.json("data/used/world-50m.json", function(error, world) {
 
@@ -205,19 +165,19 @@
         context.lineWidth = 1.5;
         context.stroke();
 
-            var countries = topojson.feature(world, world.objects.countries).features;
-            countries.forEach(function(d) {
+        var countries = topojson.feature(world, world.objects.countries).features;
+        countries.forEach(function(d) {
 
-                var country_name = country_id_name_map[d.id];
-                var country_value = country_name_val_map[country_name];
+            var country_name = id_country_map[d.id];
+            var country_value = country_name_val_map[country_name];
 
-                var country_color = color(country_value);
-                context.fillStyle = country_color;
+            var country_color = color(country_value);
+            context.fillStyle = country_color;
 
-                context.beginPath();
-                path(d);
-                context.fill();
-            });
+            context.beginPath();
+            path(d);
+            context.fill();
+        });
 
 
         // Setup Three scene
@@ -280,11 +240,10 @@
             var latlng = getEventCenter.call(this, event);
 
             var country = geo.search(latlng[0], latlng[1]);
-//            console.log(country);
 
             if (country !== null && country.code !== currentCountry) {
                 currentCountry = country.code;
-                console.log(currentCountry);
+                console.log(id_country_map[currentCountry]);
 //                d3.select("#msg").html(country.code);
 //
 //                map = textureCache(country.code, '#CDC290');
