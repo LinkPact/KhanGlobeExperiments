@@ -220,6 +220,7 @@
         // Generate a mesh layer based on materials and geometry
         var baseLayer = new THREE.Mesh(sphere, waterMaterial);
         baseLayer.addEventListener('mousemove', onGlobeMousemove);
+        //baseLayer.on('click', onGlobeMouseclick);
 
         // Generate a texture
         var mapTexture = new THREE.Texture(canvas.node());
@@ -248,6 +249,34 @@
             if (country !== null && country.code !== currentCountry) {
                 currentCountry = country.code;
                 console.log(id_country_map[currentCountry]);
+                updateProjectInfo({"title":id_country_map[currentCountry],
+                                    "info":"", "url":""})
+//                d3.select("#msg").html(country.code);
+//
+//                map = textureCache(country.code, '#CDC290');
+//                material = new THREE.MeshPhongMaterial({map: map, transparent: true});
+//                if (!overlay) {
+//                    overlay = new THREE.Mesh(new THREE.SphereGeometry(201, 40, 40), material);
+//                    overlay.rotation.y = Math.PI;
+//                    root.add(overlay);
+//                }
+//                else {
+//                    overlay.material = material;
+//                }
+            }
+        }
+
+        function onGlobeMouseclick(event) {
+            var map;
+            var material;
+
+            var latlng = getEventCenter.call(this, event);
+
+            var country = geo.search(latlng[0], latlng[1]);
+
+            if (country !== null && country.code !== currentCountry) {
+                currentCountry = country.code;
+                console.log(id_country_map[currentCountry]);
 //                d3.select("#msg").html(country.code);
 //
 //                map = textureCache(country.code, '#CDC290');
@@ -264,6 +293,7 @@
         }
 
         setEvents(camera, [baseLayer], 'mousemove', 10);
+        setEvents(camera, [baseLayer], 'mouseup', 10);
 
         function render() {
             //root.rotation.y += 0.01;
