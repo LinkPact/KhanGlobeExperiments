@@ -270,17 +270,27 @@
 
         function onGlobeMouseclick(event) {
             console.log("onGlobeMouseclick");
-            var map;
-            var material;
 
             var latlng = getEventCenter.call(this, event);
             var country = geo.search(latlng[0], latlng[1]);
 
             if (country !== null) {
                 currentCountry = country.code;
-                console.log(id_country_map[currentCountry]);
-                updateProjectInfo({"title":id_country_map[currentCountry],
-                                    "info":"", "url":""})
+                var countryName = id_country_map[currentCountry];
+                var language = country_language_map[countryName];
+                var translationRate = country_name_val_map[countryName];
+                console.log(countryName, language, translationRate);
+                
+                if(countryName !== undefined && 
+                   language !== undefined && 
+                   translationRate !== undefined)
+                {
+                    updateProjectInfo(
+                        {"title":countryName + " (" + language + ")",
+                         "info":translationRate + "%",
+                         "url":""}
+                    );
+                }
             }
         }
 
